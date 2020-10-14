@@ -1,46 +1,52 @@
 import DefaultLayout from "../layouts/layout";
 import Row from "../components/Grid/Row";
 import Sidebar from "../components/Grid/Sidebar";
+import TopBar from "../components/Grid/TopBar";
+import GradientBar from "../components/Grid/GradientBar";
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import categories from "../data/categories";
 import sounds from "../data/sounds";
 import colors from "../data/colors";
+import octaves from "../data/octaves";
 
 export default function Home() {
+  const ref = useRef();
+  const [scrollLeft, setScrollLeft] = useState(0);
+
   const getSounds = (keys) => {
     return sounds.filter((sound) => keys.includes(sound.key));
   };
 
+  const onScroll = (e) => {
+    setScrollLeft(ref.current.scrollLeft);
+  };
+
   return (
     <DefaultLayout>
-      <Styled.GridWrapper>
-        <Sidebar categories={categories} sounds={sounds} />
+      <GradientBar colors={colors} octaves={octaves} />
 
-        <Grid>
-          {categories.map((category) => {
-            return category.rows.map((row, i) => {
-              return (
-                <div key={row.key}>
-                  {i === 0 && (
-                    <Styled.TopBar>
-                      {colors.map((col, i) => {
-                        return (
-                          <li key={col.id}>
-                            <span>{col.range.max} Hz</span>
-                          </li>
-                        );
-                      })}
-                    </Styled.TopBar>
-                  )}
-                  <Row colors={colors} items={getSounds(row.items)} />
-                </div>
-              );
-            });
-          })}
-        </Grid>
-      </Styled.GridWrapper>
+      <GradientMask />
+
+      {/* <Styled.GridWrapper> */}
+      <Sidebar categories={categories} sounds={sounds} />
+
+      {/* <Grid ref={ref} onScroll={onScroll}> */}
+      <div style={{ position: "absolute", top: "188px" }}>
+        {categories.map((category) => {
+          return category.rows.map((row, i) => {
+            return (
+              <>
+                {i === 0 && <TopBar scrollLeft={scrollLeft} colors={colors} />}
+                <Row index={i} colors={colors} items={getSounds(row.items)} />
+              </>
+            );
+          });
+        })}
+      </div>
+      {/* </Grid> */}
+      {/* </Styled.GridWrapper> */}
     </DefaultLayout>
   );
 }
@@ -48,6 +54,7 @@ export default function Home() {
 const Styled = {};
 
 const Grid = styled.div`
+  position: relative;
   overflow: scroll;
   width: 100vw;
 
@@ -62,47 +69,17 @@ Styled.GridWrapper = styled.div`
   width: 100vw;
 `;
 
-Styled.TopBar = styled.ul`
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background: #2d3748;
-  box-shadow: inset 1px 0 0 0 #4a5568;
-  height: 32px;
-  padding-left: 192px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  color: #ffffff;
-  letter-spacing: 0;
-
-  li {
-    position: relative;
-    min-width: 124px;
-    width: 7.38vw;
-    height: 100%;
-    border-right: 1px solid #4a5568;
-  }
-
-  span {
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20px;
-    background: #2d3748;
-    white-space: nowrap;
-  }
-
-  strong {
-    display: block;
-  }
-
-  @media (min-width: 1680px) {
-    padding-left: 11.43vw;
-  }
+const GradientMask = styled.div`
+  position: fixed;
+  left: 0;
+  top: 140px;
+  width: 210px;
+  height: 48px;
+  background: linear-gradient(
+    90deg,
+    #1a202c 0%,
+    #1a202c 90%,
+    rgba(26, 32, 44, 0)
+  );
+  z-index: 6;
 `;

@@ -1,11 +1,10 @@
 import styled from "styled-components";
+import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 import { Normalize } from "styled-normalize";
 import SiteHeader from "../components/SiteHeader";
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
   html {
     box-sizing: border-box;
   }
@@ -18,18 +17,32 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #1A202C;
     padding-top: 148px;
   }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const DefaultLayout = ({ children }) => {
   return (
-    <Styled.Container>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        />
+      </Head>
       <Normalize />
       <GlobalStyle />
 
       <SiteHeader />
 
       {children}
-    </Styled.Container>
+    </>
   );
 };
 

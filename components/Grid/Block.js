@@ -1,7 +1,7 @@
 import { useEffect, createRef, useState } from "react";
 import styled from "styled-components";
 
-const Block = ({ index, cols, color, registerCoords, range }) => {
+const Block = ({ index, cols, color, registerCoords, range, opacity = 1 }) => {
   const renderColumns = (cols) => {
     const columns = [];
 
@@ -23,7 +23,11 @@ const Block = ({ index, cols, color, registerCoords, range }) => {
     return columns;
   };
 
-  return <Styled.Block color={color}>{renderColumns(cols)}</Styled.Block>;
+  return (
+    <Styled.Block color={color} opacity={opacity}>
+      {renderColumns(cols)}
+    </Styled.Block>
+  );
 };
 
 const Styled = {};
@@ -32,16 +36,17 @@ Styled.Block = styled.div`
   display: flex;
   min-width: 124px;
   width: 7.38vw;
-  height: 4.76vw;
-  min-height: 80px;
+  /* height: 4.76vw; */
+  height: 80px;
   background-color: ${(props) => props.color};
+  /* z-index: ${(props) => props.index}; */
+  opacity: ${(props) => props.opacity};
 `;
 
 Styled.Col = styled.div`
-  opacity: 0.2;
+  opacity: 0.15;
   width: ${(props) => `${100 / props.columns}%` || `100%`};
-  height: 4.76vw;
-  min-height: 80px;
+  height: 80px;
   border-right: 1px solid #edf2f7;
 `;
 

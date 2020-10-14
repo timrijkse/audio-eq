@@ -62,7 +62,7 @@ const Styled = {};
 
 Styled.Container = styled.ul`
   position: absolute !important;
-  left: 192px;
+  left: 0;
   top: 0;
   right: 0;
   display: block;
@@ -71,9 +71,17 @@ Styled.Container = styled.ul`
   height: 100%;
   margin: 0;
   padding: 0;
+  padding-left: 192px;
+
+  &:hover {
+    transition: background 500ms ease-out;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 Styled.Label = styled.li`
+  transition: transform 100ms ease-out;
+  cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -85,10 +93,18 @@ Styled.Label = styled.li`
   border-radius: 4px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
   color: #1a202c;
   letter-spacing: -0.35px;
   line-height: 24px;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 1.06),
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      inset 0 -2px 0 0 rgba(255, 255, 255, 0.5);
+    z-index: 2;
+  }
 `;
 
 export default Labels;

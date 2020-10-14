@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Sticky from "./Sticky";
 
 const Sidebar = ({ categories, sounds }) => {
   return (
@@ -6,7 +7,9 @@ const Sidebar = ({ categories, sounds }) => {
       {categories.map((category) => {
         return (
           <div key={category.key}>
-            <Styled.Title>{category.title}</Styled.Title>
+            <Sticky>
+              <Styled.Title>{category.title}</Styled.Title>
+            </Sticky>
             {category.rows.map((row) => {
               return <Styled.Row key={row.key}>{row.title}</Styled.Row>;
             })}
@@ -20,20 +23,23 @@ const Sidebar = ({ categories, sounds }) => {
 const Styled = {};
 
 Styled.Aside = styled.aside`
-  position: absolute;
+  overflow: hidden;
+  position: sticky;
   left: 0;
-  top: 0;
-  bottom: 0;
+  /* bottom: 0; */
   min-width: 192px;
   width: 11.43vw;
+  margin-top: 143px;
   background: #3d4748;
-  z-index: 2;
+  z-index: 4;
 `;
 
 Styled.Title = styled.h2`
+  min-width: 192px;
+  width: 11.43vw;
   height: 32px;
   margin: 0;
-  padding: 5px 32px;
+  padding: 8px 32px;
   background: #1a202c;
   font-family: "Inter", sans-serif;
   font-weight: 700;
@@ -48,9 +54,8 @@ Styled.Row = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 4.76vw;
-  min-height: 80px;
-  padding: 5px 32px;
+  height: 80px;
+  padding: 8px 32px;
   background-color: #2d3748;
   font-family: "Inter", sans-serif;
   font-weight: 600;
