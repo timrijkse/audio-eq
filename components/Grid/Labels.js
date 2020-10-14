@@ -99,10 +99,9 @@ Styled.Label = styled.li`
   line-height: 24px;
 
   &:hover {
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 1.06),
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      inset 0 -2px 0 0 rgba(255, 255, 255, 0.5);
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.10)
+
     z-index: 2;
   }
 `;

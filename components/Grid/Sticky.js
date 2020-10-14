@@ -48,7 +48,7 @@ Styled.Sticky = styled.div`
     props.isSticky &&
     `
     position: fixed;
-    top: 187px;
+    top: 188px;
     z-index: 8;
     `}
 `;

@@ -72,9 +72,9 @@ Styled.GridWrapper = styled.div`
 const GradientMask = styled.div`
   position: fixed;
   left: 0;
-  top: 140px;
+  top: 145px;
   width: 210px;
-  height: 48px;
+  height: 44px;
   background: linear-gradient(
     90deg,
     #1a202c 0%,

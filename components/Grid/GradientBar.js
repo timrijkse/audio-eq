@@ -43,6 +43,28 @@ Styled.GradientBar = styled.div`
   background-color: #1a202c;
   z-index: 5;
 
+  &:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 144px;
+    z-index: 9;
+    display: block;
+    width: 100vw !important;
+    height: 1px;
+    background-size: 100% auto;
+    background-image: linear-gradient(
+      45deg,
+      #c53030 4%,
+      #ed8936 37%,
+      #68d391 50%,
+      #319795 63%,
+      #3182ce 76%,
+      #6b46c1 83%,
+      #d53f8c 100%
+    );
+  }
+
   @media (min-width: 1680px) {
     padding-left: 11.43vw;
 
